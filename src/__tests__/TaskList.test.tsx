@@ -139,6 +139,23 @@ describe('TaskList', () => {
         expect(checkbox).toBeChecked();
       });
     });
+
+    it('throws error when toggleTask fails', async () => {
+      const user = userEvent.setup();
+
+      mockedTaskApi.fetchTasks.mockResolvedValue([
+        { id: '1', title: 'Test task', completed: false }
+      ]);
+      mockedTaskApi.toggleTask.mockRejectedValue(new Error('Network error'));
+
+      render(<TaskList />);
+
+      await screen.findByText('Test task');
+      const checkbox = screen.getByRole('checkbox');
+      await user.click(checkbox);
+
+      expect(await screen.findByRole('alert')).toHaveTextContent(/failed to update/i);
+    });
   });
 
   describe('deleting tasks', () => {
@@ -165,6 +182,22 @@ describe('TaskList', () => {
       await waitFor(() => {
         expect(screen.queryByText('Task to delete')).not.toBeInTheDocument();
       });
+    });
+
+    it('throws error when deleting fails', async () => {
+      const user = userEvent.setup();
+
+      mockedTaskApi.fetchTasks.mockResolvedValue([
+        { id: '1', title: 'Test task', completed: false }
+      ]);
+      mockedTaskApi.deleteTask.mockRejectedValue(new Error('Network error'));
+
+      render(<TaskList />);
+
+      await screen.findByText('Test task');
+      await user.click(screen.getByRole('button', { name: /delete/i }));
+
+      expect(await screen.findByRole('alert')).toHaveTextContent(/failed to delete/i);
     });
   });
 
