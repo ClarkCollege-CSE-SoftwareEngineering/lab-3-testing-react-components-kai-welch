@@ -1,0 +1,40 @@
+{
+  "name": "lab-3-testing-react-components-kai-welch",
+  "version": "1.0.0",
+  "description": "In this lab, you'll apply the React Testing Library principles from this week's readings to test React components. You'll work with a small task management application, writing tests that interact with components the way users do—not by testing implementation details, but by querying elements as users would find them.",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClarkCollege-CSE-SoftwareEngineering/lab-3-testing-react-components-kai-welch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ClarkCollege-CSE-SoftwareEngineering/lab-3-testing-react-components-kai-welch/issues"
+  },
+  "homepage": "https://github.com/ClarkCollege-CSE-SoftwareEngineering/lab-3-testing-react-components-kai-welch#readme",
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.0.18",
+    "jsdom": "^27.4.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}
