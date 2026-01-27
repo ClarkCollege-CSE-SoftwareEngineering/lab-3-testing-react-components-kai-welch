@@ -73,6 +73,32 @@ describe('AddTaskForm', () => {
       expect(onAdd).not.toHaveBeenCalled();
     });
 
+// ADDITIONAL TEST
+    it('shows error when submitting title with only whitespace', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn();
+      render(<AddTaskForm onAdd={onAdd} />);
+
+      await user.type(screen.getByLabelText(/task title/i), '     ');
+      await user.click(screen.getByRole('button', { name: /add task/i }));
+
+      expect(screen.getByRole('alert')).toHaveTextContent(/required/i);
+      expect(onAdd).not.toHaveBeenCalled();
+    });
+
+// ADDITIONAL TEST
+    it('shows error when submitting very long title', async () => {
+      const user = userEvent.setup();
+      const onAdd = vi.fn();
+      render(<AddTaskForm onAdd={onAdd} />);
+
+      await user.type(screen.getByLabelText(/task title/i), 'aodifjaodgfhoaihgfaoiudhfaioufhnaoiudghfaoidufghaoifhaoiughiaofuhgaiufhgnaiorwughnaiorguhabnofgiuahbngoiauhbfgnoaiufhnaiofhgubaoidufhasdfoaiusdhfgiouh');
+      await user.click(screen.getByRole('button', { name: /add task/i }));
+
+      expect(screen.getByRole('alert')).toHaveTextContent(/too long/i);
+      expect(onAdd).not.toHaveBeenCalled();
+    });
+
     it('shows error when title is less than 3 characters', async () => {
       const user = userEvent.setup();
       const onAdd = vi.fn();

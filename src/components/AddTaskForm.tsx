@@ -23,6 +23,11 @@ export function AddTaskForm({ onAdd }: AddTaskFormProps) {
       return;
     }
 
+    if (trimmedTitle.length > 32) {
+      setError('Task title is too long!');
+      return;
+    }
+
     onAdd(trimmedTitle);
     setTitle('');
     setError(null);
